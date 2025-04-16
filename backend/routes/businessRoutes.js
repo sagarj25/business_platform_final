@@ -15,8 +15,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       return res.status(400).json({ error: "User ID is required" });
     }
 
-    const folder = `uploads/users/${userId}/`;
-    const imageUrl = req.file ? `/${folder}${req.file.filename}` : "";
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : "";
 
     const newBusiness = new BusinessProfile({
       user: userId,
@@ -38,7 +37,6 @@ router.post("/", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // GET all Business Profiles
 router.get("/", async (req, res) => {
